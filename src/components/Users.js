@@ -13,7 +13,7 @@ const addNewUser = dispatch => {
 }
 
 function Users(props) {
-
+    console.log(props.users)
     const userList = props.users.map((user, index) => {
         return (
             <li key={index}>

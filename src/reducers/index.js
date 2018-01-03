@@ -7,7 +7,6 @@ const users = (state = [], action) => {
     switch (action.type) {
         case ADD_USER:
             fire.database().ref('users').push( action.user );
-            // axios.post('/users.json', action.user)
             return [...state, 
                 action.user
             ]
