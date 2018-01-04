@@ -3,92 +3,44 @@ import { connect } from 'react-redux'
 import Users from './components/Users'
 import fire from './fire'
 import { addDataFromFirebase } from './actions/addDataFromFirebase'
+import Games from './components/Games'
 
+// Big goals
 // User login
-// Add board games
 // Host event
 // Invite users
 // Users accept invite
-// Suggest games based on number of players
 // Add group
 // Join group
 // Voting
 // Split group
 // Track games played
 
-const Games = props => {
-  const gamesList = props.games.map(game => <li key={game.name} >{game.name}: {game.minPlayers}-{game.maxPlayers}</li>)
+// TODO
+// reference games array instead of storing games twice
+// Loading state
+// Add tests
+// Add styles
+// Option to choose game from list as well as add details
+// Add functionality to add a group and have the available board games based from the number of players
+
+const App = props => {
+  const numberOfPlayers = props.users.length
   return (
-    <div>
-        <h1>Board Games Available</h1>
-        <ul>
-          {gamesList}
-        </ul>
+    <div className="App">
+      <h1>Users</h1>
+      <Users users={props.users} />
+      <h1>All Games</h1>
+      <Games games={props.games.sort((a, b) => {
+        const alphabeticalSort = a.name < b.name ? -1 : a.name > b.name ? 1 : 0
+        return (a.minPlayers - b.minPlayers) || (a.maxPlayers - b.maxPlayers) || alphabeticalSort
+      })} />
+      <h1>Board Games Available</h1>
+      <Games games={props.games.filter(game => {
+        return numberOfPlayers >= game.minPlayers && numberOfPlayers <= game.maxPlayers
+      })} />
     </div>
-  )
-}
-class App extends Component {
-  state = {
-    users: this.props.users,
-    games: this.props.games,
-    usersLoading: true,
-    gamesLoading: true
-  }
-
-  componentDidMount() {
-    const usersRef = fire.database().ref('users').orderByKey().limitToLast(100);
-    const gamesRef = fire.database().ref('games').orderByKey().limitToLast(100);
-    const that = this
-    usersRef.once('value', function(snapshot) {
-      const snapValues = snapshot.val();
-      if (snapValues) {
-        const users = Object.keys(snapValues).map(id => {
-          return {id: id, games: [], ...snapValues[id]}
-        })
-        that.setState({users})
-        that.props.addData({users})
-        that.setState({usersLoading: false})
-      }
-    });
-    gamesRef.once('value', function(snapshot) {
-      const snapValues = snapshot.val();
-      if (snapValues) {
-        const games = Object.keys(snapValues).map(id => {
-          return {id: id, ...snapValues[id]}
-        })
-        that.setState({games})
-        that.props.addData({games})
-        that.setState({gamesLoading: false})
-      }
-    });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({users: nextProps.users, games: nextProps.games})
-  }
-
-  render() {
-    const numberOfPlayers = this.state.users.length
-    const usersLoadingState = this.state.usersLoading ? <p>Users Loading...</p> : null
-    const gamesLoadingState = this.state.gamesLoading ? <p>Games Loading...</p> : null
-      return (
-        <div className="App">
-          <h1>Users</h1>
-          {usersLoadingState}
-          <Users users={this.state.users}/>
-          {gamesLoadingState}
-          <Games games={this.state.games.filter(game => {
-            return numberOfPlayers >= game.minPlayers && numberOfPlayers <= game.maxPlayers
-          })}/>
-        </div>
-      );
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addData: data => dispatch(addDataFromFirebase(data))
-  }
+  );
 }
 
 const mapStateToProps = (state) => {
@@ -98,4 +50,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

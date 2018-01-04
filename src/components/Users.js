@@ -1,23 +1,16 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { addUser } from '../actions/addUser'
 import Games from './Games'
+import AddNewGameForm from './AddNewGameForm'
+import AddNewUserForm from './AddNewUserForm'
 
-let input
-const addNewUser = dispatch => {
-    if (!input.value.trim()) {
-        return
-    }
-    dispatch(addUser({name: input.value, games:[]}))
-    input.value = ''
-}
-
+// Don't like the use of Object.values here to turn it into an array
 function Users(props) {
     const userList = props.users.map((user, index) => {
         return (
             <li key={index}>
                 <h3>{user.name}</h3>
-                <Games games={user.games} userId={user.id}/>
+                <Games games={Object.values(user.games)}/>
+                <AddNewGameForm userId={user.id}/>
             </li>
         )
     })
@@ -27,22 +20,9 @@ function Users(props) {
             <ul>
                 {userList}
             </ul>
-            <form onSubmit={e => { 
-                e.preventDefault() 
-                props.addNewUser()
-            }}>
-                <label>User</label>
-                <input ref={node => {input = node}}/>
-                <button type='submit'>Add user</button>
-            </form>
+            <AddNewUserForm />
         </div>
     )
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-      addNewUser: () => {addNewUser(dispatch)}
-    }
-  }
-
-export default connect(null, mapDispatchToProps)(Users)
+export default Users
