@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { addUser } from '../actions/addUser'
 import Games from './Games'
@@ -13,12 +13,11 @@ const addNewUser = dispatch => {
 }
 
 function Users(props) {
-    console.log(props.users)
     const userList = props.users.map((user, index) => {
         return (
             <li key={index}>
                 <h3>{user.name}</h3>
-                <Games games={user.games} userId={index}/>
+                <Games games={user.games} userId={user.id}/>
             </li>
         )
     })

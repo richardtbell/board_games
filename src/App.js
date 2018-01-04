@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import Users from './components/Users'
 import fire from './fire'
+import { addDataFromFirebase } from './actions/addDataFromFirebase'
 
 // User login
 // Add board games
@@ -29,42 +30,64 @@ const Games = props => {
 class App extends Component {
   state = {
     users: this.props.users,
-    games: this.props.games
+    games: this.props.games,
+    usersLoading: true,
+    gamesLoading: true
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const usersRef = fire.database().ref('users').orderByKey().limitToLast(100);
     const gamesRef = fire.database().ref('games').orderByKey().limitToLast(100);
     const that = this
-    usersRef.on('value', function(snapshot) {
+    usersRef.once('value', function(snapshot) {
       const snapValues = snapshot.val();
-      const users = Object.keys(snapValues).map(id => {
-        return {id: id, ...snapValues[id], games: []}
-      })
-      that.setState({users})
+      if (snapValues) {
+        const users = Object.keys(snapValues).map(id => {
+          return {id: id, games: [], ...snapValues[id]}
+        })
+        that.setState({users})
+        that.props.addData({users})
+        that.setState({usersLoading: false})
+      }
     });
-    gamesRef.on('value', function(snapshot) {
+    gamesRef.once('value', function(snapshot) {
       const snapValues = snapshot.val();
       if (snapValues) {
         const games = Object.keys(snapValues).map(id => {
           return {id: id, ...snapValues[id]}
         })
         that.setState({games})
+        that.props.addData({games})
+        that.setState({gamesLoading: false})
       }
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({users: nextProps.users, games: nextProps.games})
+  }
+
   render() {
     const numberOfPlayers = this.state.users.length
+    const usersLoadingState = this.state.usersLoading ? <p>Users Loading...</p> : null
+    const gamesLoadingState = this.state.gamesLoading ? <p>Games Loading...</p> : null
       return (
         <div className="App">
           <h1>Users</h1>
+          {usersLoadingState}
           <Users users={this.state.users}/>
+          {gamesLoadingState}
           <Games games={this.state.games.filter(game => {
             return numberOfPlayers >= game.minPlayers && numberOfPlayers <= game.maxPlayers
           })}/>
         </div>
       );
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addData: data => dispatch(addDataFromFirebase(data))
   }
 }
 
@@ -75,4 +98,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
