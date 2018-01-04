@@ -1,0 +1,18 @@
+Big goals
+User login
+Host event
+Invite users
+Users accept invite
+Add group
+Join group
+Voting
+Split group
+Track games played
+
+TODO
+reference games array instead of storing games twice
+Loading state
+Add tests
+Add styles
+Option to choose game from list as well as add details
+Add functionality to add a group and have the available board games based from the number of players

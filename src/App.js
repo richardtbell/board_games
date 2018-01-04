@@ -1,31 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux'
 import Users from './components/Users'
-import fire from './fire'
-import { addDataFromFirebase } from './actions/addDataFromFirebase'
 import Games from './components/Games'
+import AppropriateGamesList from './components/AppropriateGamesList'
 
-// Big goals
-// User login
-// Host event
-// Invite users
-// Users accept invite
-// Add group
-// Join group
-// Voting
-// Split group
-// Track games played
-
-// TODO
-// reference games array instead of storing games twice
-// Loading state
-// Add tests
-// Add styles
-// Option to choose game from list as well as add details
-// Add functionality to add a group and have the available board games based from the number of players
-
-const App = props => {
-  const numberOfPlayers = props.users.length
+export const App = props => {
   return (
     <div className="App">
       <h1>Users</h1>
@@ -35,10 +14,7 @@ const App = props => {
         const alphabeticalSort = a.name < b.name ? -1 : a.name > b.name ? 1 : 0
         return (a.minPlayers - b.minPlayers) || (a.maxPlayers - b.maxPlayers) || alphabeticalSort
       })} />
-      <h1>Board Games Available</h1>
-      <Games games={props.games.filter(game => {
-        return numberOfPlayers >= game.minPlayers && numberOfPlayers <= game.maxPlayers
-      })} />
+      <AppropriateGamesList numberOfPlayers={props.users.length} games={props.games} />
     </div>
   );
 }
