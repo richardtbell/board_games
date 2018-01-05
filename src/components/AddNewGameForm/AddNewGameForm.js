@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { addGameForUser } from '../actions/addGame'
-import fire from '../fire'
+import { addGameForUser } from '../../actions/addGame'
+import { addGame, addGameToUser } from '../../fire'
 
-const addNewGame = (dispatch, userId, game) => {
+export const addNewGame = (dispatch, userId, game) => {
     if (!game.name.trim()) {
         return
     }
-    fire.database().ref('/games').push(game)
-    fire.database().ref('/users/' + userId + '/games').push(game)
+    addGame(game)
+    addGameToUser(userId, game)
     dispatch(addGameForUser({ userId, game }))
 }
 
-class AddNewGameForm extends Component {
+export class AddNewGameForm extends Component {
     initialState = {
         name: '',
         minPlayers: '',

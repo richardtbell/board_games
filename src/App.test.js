@@ -20,4 +20,8 @@ describe('<App />', () => {
         expect(wrapper.find('AppropriateGamesList')).toHaveLength(1)
     })
 
+    it('should render <SortedGamesList />', () => {
+        expect(wrapper.find('SortedGamesList')).toHaveLength(1)
+    })
+
 })

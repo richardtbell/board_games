@@ -1,5 +1,5 @@
 import React from 'react';
-import Games from './Games'
+import Games from '../Games/Games'
 
 const AppropriateGamesList = props => {
     return (

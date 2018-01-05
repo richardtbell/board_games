@@ -10,4 +10,17 @@ var config = {
 };
 
 var fire = firebase.initializeApp(config);
+
+export const saveUser = (user) => {
+    fire.database().ref('users').push(user);
+}
+
+export const addGame = (game) => {
+    fire.database().ref('/games').push(game);
+}
+
+export const addGameToUser = (userId, game) => {
+    fire.database().ref('/users/' + userId + '/games').push(game);
+}
+
 export default fire;

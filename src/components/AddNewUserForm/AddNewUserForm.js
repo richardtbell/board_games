@@ -1,24 +1,24 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addUser } from '../actions/addUser'
-import fire from '../fire'
+import { addUser } from '../../actions/addUser'
+import { saveUser } from '../../fire'
 
-let input
-const addNewUser = dispatch => {
+export const addNewUser = (dispatch, input) => {
     if (!input.value.trim()) {
         return
     }
-    const user = {name: input.value, games:[]}
-    fire.database().ref('users').push( user );
+    const user = { name: input.value, games: [] }
+    saveUser()
     dispatch(addUser(user))
     input.value = ''
 }
 
-const AddNewUserForm = props => {
+export const AddNewUserForm = props => {
+    let input
     return (
         <form onSubmit={e => {
             e.preventDefault()
-            props.addNewUser()
+            props.addNewUser(input)
         }}>
             <label>User</label>
             <input ref={node => { input = node }} />
@@ -30,8 +30,8 @@ const AddNewUserForm = props => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      addNewUser: () => {addNewUser(dispatch)}
+        addNewUser: (input) => { addNewUser(dispatch, input) }
     }
-  }
+}
 
 export default connect(null, mapDispatchToProps)(AddNewUserForm)

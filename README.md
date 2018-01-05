@@ -32,3 +32,4 @@ There's an npm script to build and deploy.
 * Add styles
 * Option to choose game from list as well as add details
 * Add functionality to add a group and have the available board games based from the number of players
+* Add form validation

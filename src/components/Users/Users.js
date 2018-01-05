@@ -1,7 +1,7 @@
 import React from 'react'
-import Games from './Games'
-import AddNewGameForm from './AddNewGameForm'
-import AddNewUserForm from './AddNewUserForm'
+import Games from '../Games/Games'
+import AddNewGameForm from '../AddNewGameForm/AddNewGameForm'
+import AddNewUserForm from '../AddNewUserForm/AddNewUserForm'
 
 // Don't like the use of Object.values here to turn it into an array
 function Users(props) {
@@ -9,14 +9,15 @@ function Users(props) {
         return (
             <li key={index}>
                 <h3>{user.name}</h3>
-                <Games games={Object.values(user.games)}/>
-                <AddNewGameForm userId={user.id}/>
+                <Games games={Object.values(user.games)} />
+                <AddNewGameForm userId={user.id} />
             </li>
         )
     })
-    
+
     return (
         <div>
+            <h1>Users</h1>
             <ul>
                 {userList}
             </ul>
