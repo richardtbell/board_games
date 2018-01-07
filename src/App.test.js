@@ -16,8 +16,8 @@ describe('<App />', () => {
         expect(wrapper.find('Users')).toHaveLength(1)
     })
 
-    it('should render <AppropriateGamesList />', () => {
-        expect(wrapper.find('AppropriateGamesList')).toHaveLength(1)
+    it('should render <Event />', () => {
+        expect(wrapper.find('Event')).toHaveLength(1)
     })
 
     it('should render <SortedGamesList />', () => {

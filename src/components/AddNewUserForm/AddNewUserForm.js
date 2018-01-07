@@ -7,9 +7,11 @@ export const addNewUser = (dispatch, input) => {
     if (!input.value.trim()) {
         return
     }
-    const user = { name: input.value, games: [] }
-    saveUser(user)
-    dispatch(addUser(user))
+    const user = { name: input.value, games: [], attending: false }
+    saveUser(user).then(response => {
+        user.id = response.key
+        dispatch(addUser(user))
+    })
     input.value = ''
 }
 

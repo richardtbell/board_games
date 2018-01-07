@@ -12,7 +12,7 @@ var config = {
 var fire = firebase.initializeApp(config);
 
 export const saveUser = (user) => {
-    fire.database().ref('/users').push(user);
+    return fire.database().ref('/users').push(user);
 }
 
 export const addGame = (game) => {

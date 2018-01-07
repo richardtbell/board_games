@@ -1,15 +1,15 @@
 import React from 'react'
 import { configure, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import AppropriateGamesList from './AppropriateGamesList'
+import Event from './Event'
 
 configure({ adapter: new Adapter() })
 
-describe('<AppropriateGamesList />', () => {
+describe('<Event />', () => {
     let wrapper;
 
     beforeEach(() => {
-        wrapper = shallow(<AppropriateGamesList numberOfPlayers={0}
+        wrapper = shallow(<Event players={[]}
             games={[{ name: '2 player game', minPlayers: 2, maxPlayers: 2 }]} />)
     })
 
@@ -18,17 +18,17 @@ describe('<AppropriateGamesList />', () => {
     })
 
     it('should not show games with fewer than required players', () => {
-        wrapper.setProps({ numberOfPlayers: 1 })
+        wrapper.setProps({ players: [{ id: 1 }] })
         expect(wrapper.find('Games').props().games).toHaveLength(0)
     })
 
     it('should not show games with more players than available', () => {
-        wrapper.setProps({ numberOfPlayers: 3 })
+        wrapper.setProps({ players: [{ id: 1 }, { id: 2 }, { id: 3 }] })
         expect(wrapper.find('Games').props().games).toHaveLength(0)
     })
 
     it('should show games with the right number of players', () => {
-        wrapper.setProps({ numberOfPlayers: 2 })
+        wrapper.setProps({ players: [{ id: 1 }, { id: 2 }] })
         expect(wrapper.find('Games').props().games).toHaveLength(1)
     })
 })

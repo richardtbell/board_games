@@ -41,3 +41,14 @@ There's an npm script to build and deploy.
 * Create event in group
 * Scrape games from boardgamegeek
 * Look into advertisement
+
+## TECH DEBT
+* Test getPlayersAttending
+* Test UserAttending
+* Test reducers
+* Test fire.js
+* Test actions?
+* Sort out DB
+* Don't update state optimistically?
+* test flatten array and move into utils
+* test getPlayersGames

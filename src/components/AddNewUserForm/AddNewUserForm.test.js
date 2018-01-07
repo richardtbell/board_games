@@ -41,7 +41,14 @@ describe('<AddNewUserForm />', () => {
         let saveUserCalled
         const dispatch = (args) => { dispatchArgs = args }
         const fire = require('../../fire')
-        fire.saveUser = () => { saveUserCalled = true }
+        fire.saveUser = () => {
+            saveUserCalled = true
+            return {
+                then: callback => {
+                    callback({ key: 1 })
+                }
+            }
+        }
 
         beforeEach(() => {
             dispatchArgs = null
@@ -57,7 +64,7 @@ describe('<AddNewUserForm />', () => {
 
         it('should dispatch an action to add the user', () => {
             addNewUser(dispatch, input)
-            expect(dispatchArgs).toEqual(addUser({ name: 'Bob', games: [] }))
+            expect(dispatchArgs).toEqual(addUser({ name: 'Bob', games: [], attending: false, id: 1 }))
         })
 
         it('should reset the input to an empty string', () => {
