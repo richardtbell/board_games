@@ -12,7 +12,7 @@ var config = {
 var fire = firebase.initializeApp(config);
 
 export const saveUser = (user) => {
-    fire.database().ref('users').push(user);
+    fire.database().ref('/users').push(user);
 }
 
 export const addGame = (game) => {
@@ -21,6 +21,12 @@ export const addGame = (game) => {
 
 export const addGameToUser = (userId, game) => {
     fire.database().ref('/users/' + userId + '/games').push(game);
+}
+
+export const toggleAttendance = (user) => {
+    const updates = {}
+    updates['/users/' + user.id + '/attending'] = !user.attending
+    fire.database().ref().update(updates);
 }
 
 export default fire;

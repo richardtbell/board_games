@@ -8,7 +8,7 @@ export const addNewUser = (dispatch, input) => {
         return
     }
     const user = { name: input.value, games: [] }
-    saveUser()
+    saveUser(user)
     dispatch(addUser(user))
     input.value = ''
 }

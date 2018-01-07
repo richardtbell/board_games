@@ -20,6 +20,7 @@ There's an npm script to build and deploy.
 * User login
 * Host event
 * Invite users
+* Email users that they were invited to group / event
 * Users accept/decline invite
 * Split group
 * Voting
@@ -28,8 +29,15 @@ There's an npm script to build and deploy.
 ## Next Steps
 * reference games array instead of storing games twice (not urgent)
 * Loading state (not urgent)
-* Add more tests
 * Add styles
 * Option to choose game from list as well as add details
 * Add functionality to add a group and have the available board games based from the number of players
 * Add form validation
+* Add option for player to be attending
+* Have clear all attending
+* Table format
+* Board games of user as list (links to details of board game maybe)
+* Add group
+* Create event in group
+* Scrape games from boardgamegeek
+* Look into advertisement
