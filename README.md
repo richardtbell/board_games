@@ -45,3 +45,4 @@ There's an npm script to build and deploy.
 * Test fire.js
 * Sort out DB
 * Don't update state optimistically?
+* Users.js - need to call Object.values - don't like this

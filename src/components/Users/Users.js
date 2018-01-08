@@ -3,8 +3,8 @@ import Games from '../Games/Games'
 import AddNewGameForm from '../AddNewGameForm/AddNewGameForm'
 import AddNewUserForm from '../AddNewUserForm/AddNewUserForm'
 import UserAttending from '../UserAttending/UserAttending'
+import { Title } from '../UI'
 
-// Don't like the use of Object.values here to turn it into an array
 function Users(props) {
     const userList = props.users.map((user, index) => {
         return (
@@ -19,7 +19,7 @@ function Users(props) {
 
     return (
         <div>
-            <h1>Users</h1>
+            <Title>Users</Title>
             <ul>
                 {userList}
             </ul>
