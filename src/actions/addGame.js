@@ -1,6 +1,6 @@
 export const ADD_GAME_FOR_USER = 'ADD_GAME_FOR_USER'
 
-export const addGameForUser = (action) => ({
+export const addGameForUser = ({ game, userId }) => ({
     type: ADD_GAME_FOR_USER,
-    action
+    game, userId
 })

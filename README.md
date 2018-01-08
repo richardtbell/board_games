@@ -33,22 +33,15 @@ There's an npm script to build and deploy.
 * Option to choose game from list as well as add details
 * Add functionality to add a group and have the available board games based from the number of players
 * Add form validation
-* Add option for player to be attending
 * Have clear all attending
 * Table format
-* Board games of user as list (links to details of board game maybe)
+* Board games of user as list or a field that is initially hidden? (links to details of board game maybe)
 * Add group
 * Create event in group
 * Scrape games from boardgamegeek
-* Look into advertisement
+* Add routing
 
 ## TECH DEBT
-* Test getPlayersAttending
-* Test UserAttending
-* Test reducers
 * Test fire.js
-* Test actions?
 * Sort out DB
 * Don't update state optimistically?
-* test flatten array and move into utils
-* test getPlayersGames

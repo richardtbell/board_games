@@ -6,13 +6,16 @@ import { TOGGLE_ATTENDANCE } from '../actions/toggleAttendance'
 const users = (state = [], action) => {
     switch (action.type) {
         case ADD_USER:
+            if (!action.user) {
+                return state
+            }
             return [...state,
             action.user
             ]
         case ADD_GAME_FOR_USER:
             return state.map(user => {
-                if (user.id === action.action.userId) {
-                    const updatedUser = { ...user, games: [...user.games, action.action.game] }
+                if (user.id === action.userId) {
+                    const updatedUser = { ...user, games: [...user.games, action.game] }
                     return updatedUser
                 } else {
                     return user

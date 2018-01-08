@@ -3,7 +3,12 @@ import { toggleAttendance } from '../../actions/toggleAttendance'
 import { connect } from 'react-redux'
 import { toggleAttendance as toggleDbAttendance } from '../../fire'
 
-function UserAttending(props) {
+export const handleCheckboxChange = (dispatch, user) => {
+    toggleDbAttendance(user)
+    dispatch(toggleAttendance(user.id))
+}
+
+export const UserAttending = (props) => {
     return (
         <label>
             User Attending
@@ -15,8 +20,7 @@ function UserAttending(props) {
 const mapDispatchToProps = dispatch => {
     return {
         toggleAttendance: (user) => {
-            toggleDbAttendance(user)
-            dispatch(toggleAttendance(user.id))
+            handleCheckboxChange(dispatch, user)
         }
     }
 }

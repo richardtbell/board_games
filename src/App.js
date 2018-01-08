@@ -3,26 +3,29 @@ import { connect } from 'react-redux'
 import Users from './components/Users/Users'
 import Event from './components/Event/Event'
 import SortedGamesList from './components/SortedGamesList/SortedGamesList'
+import { flattenArray } from './utils'
+
+export const getPlayersAttending = (users) => {
+  if (!users) {
+    return []
+  }
+  return users.filter(user => user.attending)
+}
+
+export const getPlayersGames = (users) => {
+  if (!users) {
+    return []
+  }
+  const games = users.map(user => user.attending ? Object.values(user.games) : [])
+  return flattenArray(games)
+}
 
 export const App = props => {
-  const getPlayersAttending = () => {
-    return props.users.filter(user => user.attending)
-  }
-
-  const flattenArray = (array) => {
-    return [].concat.apply([], array)
-  }
-
-  const getPlayersGames = () => {
-    const games = props.users.map(user => user.attending ? Object.values(user.games) : [])
-    return flattenArray(games)
-  }
-
   return (
     <div className="App">
       <Users users={props.users} />
       <SortedGamesList games={props.games} />
-      <Event players={getPlayersAttending()} games={getPlayersGames()} />
+      <Event players={getPlayersAttending(props.users)} games={getPlayersGames(props.users)} />
     </div>
   );
 }
