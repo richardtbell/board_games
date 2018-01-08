@@ -4,8 +4,9 @@ import AddNewGameForm from '../AddNewGameForm/AddNewGameForm'
 import AddNewUserForm from '../AddNewUserForm/AddNewUserForm'
 import UserAttending from '../UserAttending/UserAttending'
 import { Title } from '../UI'
+import { connect } from 'react-redux'
 
-function Users(props) {
+export const Users = (props) => {
     const userList = props.users.map((user, index) => {
         return (
             <li key={index}>
@@ -28,4 +29,10 @@ function Users(props) {
     )
 }
 
-export default Users
+const mapStateToProps = (state) => {
+    return {
+        users: state.users,
+    }
+}
+
+export default connect(mapStateToProps)(Users);

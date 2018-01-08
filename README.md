@@ -46,3 +46,4 @@ There's an npm script to build and deploy.
 * Sort out DB
 * Don't update state optimistically?
 * Users.js - need to call Object.values - don't like this
+* Test routes in App.test.js

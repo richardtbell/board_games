@@ -1,7 +1,24 @@
 import React from 'react';
 import Games from '../Games/Games'
+import { flattenArray } from '../../utils'
+import { connect } from 'react-redux'
 
-const Event = props => {
+export const getPlayersAttending = (users) => {
+    if (!users) {
+        return []
+    }
+    return users.filter(user => user.attending)
+}
+
+export const getPlayersGames = (users) => {
+    if (!users) {
+        return []
+    }
+    const games = users.map(user => user.attending ? Object.values(user.games) : [])
+    return flattenArray(games)
+}
+
+export const Event = props => {
     const playersList = props.players.map(player => {
         return <div key={player.id}>{player.name}</div>
     })
@@ -23,4 +40,11 @@ const Event = props => {
     )
 }
 
-export default Event
+const mapStateToProps = (state) => {
+    return {
+        players: getPlayersAttending(state.users),
+        games: getPlayersGames(state.users)
+    }
+}
+
+export default connect(mapStateToProps)(Event);

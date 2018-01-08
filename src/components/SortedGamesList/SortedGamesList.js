@@ -1,7 +1,8 @@
 import React from 'react';
 import Games from '../Games/Games'
+import { connect } from 'react-redux'
 
-const SortedGamesList = props => {
+export const SortedGamesList = props => {
     return (
         <div>
             <h1>All Games</h1>
@@ -13,4 +14,10 @@ const SortedGamesList = props => {
     )
 }
 
-export default SortedGamesList
+const mapStateToProps = (state) => {
+    return {
+        games: state.games
+    }
+}
+
+export default connect(mapStateToProps)(SortedGamesList);
