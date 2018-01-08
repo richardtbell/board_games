@@ -4,16 +4,19 @@ import Event from './components/Event/Event'
 import SortedGamesList from './components/SortedGamesList/SortedGamesList'
 import { Switch, Route } from 'react-router-dom'
 import PageNotFound from './components/PageNotFound/PageNotFound'
+import Layout from './components/Layout/Layout'
 
 const App = props => {
   return (
-    <Switch>
-      <Route path="/users" component={Users} />
-      <Route path="/games" component={SortedGamesList} />
-      <Route path="/event" component={Event} />
-      <Route path="/" exact component={Event} />
-      <Route component={PageNotFound} />
-    </Switch>
+    <Layout>
+      <Switch>
+        <Route path="/users" component={Users} />
+        <Route path="/games" component={SortedGamesList} />
+        <Route path="/event" component={Event} />
+        <Route path="/" exact component={Event} />
+        <Route component={PageNotFound} />
+      </Switch>
+    </Layout>
   );
 }
 
