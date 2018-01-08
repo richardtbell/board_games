@@ -1,21 +1,10 @@
 import React from 'react'
-import Games from '../Games/Games'
-import AddNewGameForm from '../AddNewGameForm/AddNewGameForm'
 import AddNewUserForm from '../AddNewUserForm/AddNewUserForm'
-import UserAttending from '../UserAttending/UserAttending'
 import { connect } from 'react-redux'
+import User from './User'
 
 export const Users = (props) => {
-    const userList = props.users.map((user, index) => {
-        return (
-            <li key={index}>
-                <h3>{user.name}</h3>
-                <UserAttending user={user} />
-                <Games games={Object.values(user.games)} />
-                <AddNewGameForm userId={user.id} />
-            </li>
-        )
-    })
+    const userList = props.users.map((user) => <User key={user.id} user={user} />)
 
     return (
         <div>
