@@ -5,6 +5,7 @@ import SortedGamesList from './components/SortedGamesList/SortedGamesList'
 import { Switch, Route } from 'react-router-dom'
 import PageNotFound from './components/PageNotFound/PageNotFound'
 import Layout from './components/Layout/Layout'
+import './commonStyles.css'
 
 const App = props => {
   return (

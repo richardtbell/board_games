@@ -3,7 +3,6 @@ import Games from '../Games/Games'
 import AddNewGameForm from '../AddNewGameForm/AddNewGameForm'
 import AddNewUserForm from '../AddNewUserForm/AddNewUserForm'
 import UserAttending from '../UserAttending/UserAttending'
-import { Title } from '../UI'
 import { connect } from 'react-redux'
 
 export const Users = (props) => {
@@ -20,7 +19,7 @@ export const Users = (props) => {
 
     return (
         <div>
-            <Title>Users</Title>
+            <h1>Users</h1>
             <ul>
                 {userList}
             </ul>
