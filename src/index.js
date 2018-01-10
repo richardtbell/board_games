@@ -14,32 +14,32 @@ const store = createStore(financeApp, window.__REDUX_DEVTOOLS_EXTENSION__ && win
 const usersRef = fire.database().ref('users').orderByKey().limitToLast(100);
 const gamesRef = fire.database().ref('games').orderByKey().limitToLast(100);
 
-usersRef.once('value', function(snapshot) {
+usersRef.once('value', function (snapshot) {
   const snapValues = snapshot.val();
   if (snapValues) {
     const users = Object.keys(snapValues).map(id => {
-      return {id: id, games: [], ...snapValues[id]}
+      return { id: id, games: [], ...snapValues[id] }
     })
-    store.dispatch(addDataFromFirebase({users}))
+    store.dispatch(addDataFromFirebase({ users }))
   }
 });
 
-gamesRef.once('value', function(snapshot) {
+gamesRef.once('value', function (snapshot) {
   const snapValues = snapshot.val();
   if (snapValues) {
     const games = Object.keys(snapValues).map(id => {
-      return {id: id, ...snapValues[id]}
+      return { id: id, ...snapValues[id] }
     })
-    store.dispatch(addDataFromFirebase({games}))
+    store.dispatch(addDataFromFirebase({ games }))
   }
 });
 
 const app = (
-    <Provider store={store}>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </Provider>
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
 )
 
 ReactDOM.render(app, document.getElementById('root'));

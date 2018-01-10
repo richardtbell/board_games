@@ -12,7 +12,26 @@ var config = {
 var fire = firebase.initializeApp(config);
 
 export const saveUser = (user) => {
-    return fire.database().ref('/users').push(user);
+    findUserBy({ field: 'uid', value: user.uid }).then(foundUser => {
+        if (foundUser) {
+            const updates = {}
+            updates['/users/' + foundUser.id] = user
+            return fire.database().ref().update(updates);
+        } else {
+            return fire.database().ref('/users/').push(user);
+        }
+    })
+}
+
+export const findUserBy = ({ field, value }) => {
+    return fire.database().ref('users').once('value').then(snapshot => {
+        const users = snapshot.val()
+        for (var id in users) {
+            if (users.hasOwnProperty(id) && users[id][field] === value) {
+                return { ...users[id], id: id }
+            }
+        }
+    })
 }
 
 export const addGame = (game) => {

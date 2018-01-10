@@ -1,8 +1,9 @@
 import users from './users'
-import { ADD_USER, addUser } from '../actions/addUser'
-import { ADD_GAME_FOR_USER, addGameForUser } from '../actions/addGame'
-import { ADD_DATA_FROM_FIREBASE, addDataFromFirebase } from '../actions/addDataFromFirebase'
-import { TOGGLE_ATTENDANCE, toggleAttendance } from '../actions/toggleAttendance'
+import { addUser } from '../actions/addUser'
+import { addGameForUser } from '../actions/addGame'
+import { addDataFromFirebase } from '../actions/addDataFromFirebase'
+import { toggleAttendance } from '../actions/toggleAttendance'
+import { signIn } from '../actions/signIn'
 
 describe('users reducer', () => {
     it('should return the same state when no action', () => {
@@ -30,6 +31,27 @@ describe('users reducer', () => {
 
         it('should add a second user to state', () => {
             expect(users([{ name: 'fake2' }], addUser({ name: 'fake' }))).toEqual([{ name: 'fake2' }, { name: 'fake' }])
+        })
+    })
+
+    describe('SIGN_IN', () => {
+        const user2 = { name: 'fake2', uid: 2 };
+        const user1 = { name: 'fake', uid: 1 };
+
+        it('should return previous state when no user added', () => {
+            expect(users([], signIn())).toEqual([])
+        })
+
+        it('should add user to state', () => {
+            expect(users([], signIn(user1))).toEqual([user1])
+        })
+
+        it('should add a second user to state', () => {
+            expect(users([user2], signIn(user1))).toEqual([user2, user1])
+        })
+
+        it('should not add the same user twice', () => {
+            expect(users([user1], signIn(user1))).toEqual([user1])
         })
     })
 

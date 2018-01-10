@@ -8,6 +8,8 @@ const NavigationBar = (props) => {
             <StyledNavLink to="/users">Users</StyledNavLink>
             <StyledNavLink to="/event">Event</StyledNavLink>
             <StyledNavLink to="/games">Games</StyledNavLink>
+            <StyledNavLink to="/profile">Profile</StyledNavLink>
+            <StyledNavLink to="/signin">Signin</StyledNavLink>
             <hr />
         </header>
     )

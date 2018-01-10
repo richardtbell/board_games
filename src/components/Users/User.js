@@ -28,7 +28,7 @@ export default class User extends Component {
     render() {
         return (
             <li>
-                <span>{this.props.user.name}</span>
+                <span>{this.props.user.displayName}</span>
                 <UserAttending user={this.props.user} />
                 {this.renderGames()}
             </li>
