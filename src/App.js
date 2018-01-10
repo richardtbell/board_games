@@ -1,5 +1,5 @@
 import React from 'react';
-import Users from './components/Users/Users'
+import Users from './pages/Users'
 import Event from './components/Event/Event'
 import SortedGamesList from './components/SortedGamesList/SortedGamesList'
 import { Switch, Route } from 'react-router-dom'

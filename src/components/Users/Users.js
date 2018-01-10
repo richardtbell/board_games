@@ -1,5 +1,4 @@
 import React from 'react'
-import AddNewUserForm from '../AddNewUserForm/AddNewUserForm'
 import { connect } from 'react-redux'
 import User from './User'
 
@@ -8,11 +7,9 @@ export const Users = (props) => {
 
     return (
         <div>
-            <h1>Users</h1>
             <ul>
                 {userList}
             </ul>
-            <AddNewUserForm />
         </div>
     )
 }

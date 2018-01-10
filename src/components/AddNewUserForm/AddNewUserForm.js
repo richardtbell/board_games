@@ -22,7 +22,6 @@ export const AddNewUserForm = props => {
             e.preventDefault()
             props.addNewUser(input)
         }}>
-            <label>User</label>
             <input ref={node => { input = node }} />
             <button type='submit'>Add user</button>
         </form>

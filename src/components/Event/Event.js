@@ -2,6 +2,7 @@ import React from 'react';
 import Games from '../Games/Games'
 import { flattenArray } from '../../utils'
 import { connect } from 'react-redux'
+import Users from '../Users/Users'
 
 export const getPlayersAttending = (users) => {
     if (!users) {
@@ -32,6 +33,8 @@ export const Event = props => {
     return (
         <div>
             <h1>Event</h1>
+            <h2>Players invited</h2>
+            <Users users={props.users} />
             <h2>Players Attending</h2>
             {playersList}
             <h2>Suitable Games</h2>
@@ -43,7 +46,8 @@ export const Event = props => {
 const mapStateToProps = (state) => {
     return {
         players: getPlayersAttending(state.users),
-        games: getPlayersGames(state.users)
+        games: getPlayersGames(state.users),
+        users: state.users
     }
 }
 

@@ -16,17 +16,12 @@ describe('<Users />', () => {
         )
     })
 
-    it('should render a title', () => {
-        expect(wrapper.find('h1')).toHaveLength(1)
-        expect(wrapper.find('h1').text()).toEqual('Users')
+    it('should render a ul', () => {
+        expect(wrapper.find('ul')).toHaveLength(1)
     })
 
     it('should render a list of Users', () => {
         expect(wrapper.find('User')).toHaveLength(2)
-    })
-
-    it('should render an AddNewUserForm', () => {
-        expect(wrapper.find(AddNewUserForm)).toHaveLength(1)
     })
 
 })

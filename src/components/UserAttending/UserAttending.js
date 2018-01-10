@@ -2,18 +2,23 @@ import React from 'react'
 import { toggleAttendance } from '../../actions/toggleAttendance'
 import { connect } from 'react-redux'
 import { toggleAttendance as toggleDbAttendance } from '../../fire'
+import styled from 'styled-components'
 
 export const handleCheckboxChange = (dispatch, user) => {
     toggleDbAttendance(user)
     dispatch(toggleAttendance(user.id))
 }
 
+const Label = styled.label`
+    padding: 20px;
+`
+
 export const UserAttending = (props) => {
     return (
-        <label>
-            User Attending
+        <Label>
+            Attending?
             <input type="checkbox" onChange={() => props.toggleAttendance(props.user)} checked={props.user.attending} />
-        </label>
+        </Label>
     )
 }
 

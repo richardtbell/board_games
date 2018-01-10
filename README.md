@@ -27,19 +27,17 @@ There's an npm script to build and deploy.
 * Track games played
 
 ## Next Steps
+* New User page
+* Edit user page
 * reference games array instead of storing games twice (not urgent)
-* Loading state (not urgent)
 * Add styles
 * Option to choose game from list as well as add details
-* Add functionality to add a group and have the available board games based from the number of players
 * Add form validation
 * Have clear all attending
 * Table format
-* Board games of user as list or a field that is initially hidden? (links to details of board game maybe)
 * Add group
 * Create event in group
 * Scrape games from boardgamegeek
-* Add routing
 
 ## TECH DEBT
 * Test fire.js
