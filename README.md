@@ -38,6 +38,9 @@ There's an npm script to build and deploy.
 * Add group
 * Create event in group
 * Scrape games from boardgamegeek
+* Redirects (Signin -> Profile, anywhere signed out -> signin)
+* login cookie to persist login on page reload
+* SuperAdmin role?
 
 ## TECH DEBT
 * Test fire.js
@@ -46,3 +49,4 @@ There's an npm script to build and deploy.
 * Users.js - need to call Object.values - don't like this
 * Test routes in App.test.js
 * Remove the need to configure the adaptor in every test file
+070436 26778904

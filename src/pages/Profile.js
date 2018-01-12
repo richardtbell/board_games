@@ -1,29 +1,41 @@
 import React from 'react'
-// import fire from '../fire'
-// import firebase from 'firebase'
-// import { signIn } from '../actions/signIn'
-// import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-// import { saveUser } from '../fire'
+import AddNewGameForm from '../components/AddNewGameForm/AddNewGameForm'
+import Games from '../components/Games/Games'
+import { Redirect } from 'react-router-dom'
 
 const Profile = (props) => {
-    const fields = Object.keys(props.user).map(field => {
-        return (
-            <label key={field}>
-                {field}
-                <input value={props.user[field]} />
-            </label>
-        )
-    })
+    let redirect
+    if (!props.user.uid) {
+        redirect = <Redirect to='/signin' />
+    }
     return (
-        <form>
-            {fields}
-        </form>
+        <div>
+            <form>
+                {redirect}
+                <label>
+                    Display Name
+                    <input value={props.user.displayName} />
+                </label>
+                <label>
+                    Email
+                    <input value={props.user.email} />
+                </label>
+            </form>
+            <h2>Games</h2>
+            <Games games={props.user.games ? Object.values(props.user.games) : []} />
+            <AddNewGameForm userId={props.user.id} />
+        </div>
     )
 }
 
+const getLoggedInUser = state => {
+    const user = state.users.filter(user => user.uid === state.loggedInUser.uid)[0]
+    return user ? user : {}
+}
+
 const mapStatetoProps = state => ({
-    user: state.loggedInUser
+    user: getLoggedInUser(state)
 })
 
 export default connect(mapStatetoProps)(Profile)

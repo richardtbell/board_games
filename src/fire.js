@@ -12,16 +12,23 @@ var config = {
 var fire = firebase.initializeApp(config);
 
 export const saveUser = (user) => {
-    findUserBy({ field: 'uid', value: user.uid }).then(foundUser => {
-        if (foundUser) {
-            const updates = {}
-            updates['/users/' + foundUser.id] = user
-            return fire.database().ref().update(updates);
-        } else {
-            return fire.database().ref('/users/').push(user);
-        }
+    return new Promise((resolve, reject) => {
+        findUserBy({ field: 'uid', value: user.uid }).then(foundUser => {
+            if (foundUser) {
+                const updates = {}
+                const updatedUser = { ...foundUser, ...user }
+                updates['/users/' + foundUser.id] = updatedUser
+                fire.database().ref().update(updates)
+                resolve(updatedUser)
+            } else {
+                fire.database().ref('/users/').push(user).then(response => {
+                    resolve({ ...user, id: response.key })
+                })
+            }
+        })
     })
 }
+
 
 export const findUserBy = ({ field, value }) => {
     return fire.database().ref('users').once('value').then(snapshot => {
