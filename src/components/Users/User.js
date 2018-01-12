@@ -17,7 +17,6 @@ export default class User extends Component {
             return (
                 <div>
                     <Games games={Object.values(this.props.user.games)} />
-                    <AddNewGameForm userId={this.props.user.id} />
                 </div>
             )
         } else {
@@ -29,7 +28,7 @@ export default class User extends Component {
         return (
             <li>
                 <span>{this.props.user.displayName}</span>
-                <UserAttending user={this.props.user} />
+                {/* <UserAttending user={this.props.user} /> */}
                 {this.renderGames()}
             </li>
         )

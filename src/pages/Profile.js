@@ -3,25 +3,25 @@ import { connect } from 'react-redux'
 import AddNewGameForm from '../components/AddNewGameForm/AddNewGameForm'
 import Games from '../components/Games/Games'
 import { Redirect } from 'react-router-dom'
+import { Field, reduxForm } from 'redux-form'
+import ProfileForm from '../components/Profile/Profile'
+import { updateUser } from '../actions/updateUser'
+import { saveUser } from '../fire'
 
 const Profile = (props) => {
     let redirect
     if (!props.user.uid) {
         redirect = <Redirect to='/signin' />
     }
+
+    const handleSubmit = (values, dispatch) => {
+        saveUser(values)
+        dispatch(updateUser(values))
+    }
+
     return (
         <div>
-            <form>
-                {redirect}
-                <label>
-                    Display Name
-                    <input value={props.user.displayName} />
-                </label>
-                <label>
-                    Email
-                    <input value={props.user.email} />
-                </label>
-            </form>
+            <ProfileForm onSubmit={handleSubmit} />
             <h2>Games</h2>
             <Games games={props.user.games ? Object.values(props.user.games) : []} />
             <AddNewGameForm userId={props.user.id} />

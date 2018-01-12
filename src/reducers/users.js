@@ -3,6 +3,7 @@ import { ADD_GAME_FOR_USER } from '../actions/addGame'
 import { ADD_DATA_FROM_FIREBASE } from '../actions/addDataFromFirebase'
 import { TOGGLE_ATTENDANCE } from '../actions/toggleAttendance'
 import { SIGN_IN } from '../actions/signIn'
+import { UPDATE_USER } from '../actions/updateUser'
 
 function userExists(state, action) {
     return state.some(user => user.uid === action.user.uid);
@@ -24,7 +25,14 @@ const users = (state = [], action) => {
             return [...state,
             action.user
             ]
-
+        case UPDATE_USER:
+            return state.map(user => {
+                if (user.id === action.user.id) {
+                    return { ...action.user }
+                } else {
+                    return user
+                }
+            })
         case ADD_GAME_FOR_USER:
             return state.map(user => {
                 if (user.id === action.userId) {

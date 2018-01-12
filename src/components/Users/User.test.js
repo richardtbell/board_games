@@ -46,10 +46,6 @@ describe('<User />', () => {
         it('should render Games', () => {
             expect(wrapper.find('Games')).toHaveLength(1)
         })
-
-        it('should render AddNewGameForm', () => {
-            expect(wrapper.find(AddNewGameForm)).toHaveLength(1)
-        })
     })
 
 })
