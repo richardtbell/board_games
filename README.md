@@ -51,3 +51,4 @@ There's an npm script to build and deploy.
 * Remove the need to configure the adaptor in every test file
 * Add "attending" to event but not users
 * Games should be a purely presentational list of games (props should be an array)
+* Only able to click attending if its your own user

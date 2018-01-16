@@ -3,6 +3,7 @@ import { configure, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import { AddNewUserForm, addNewUser } from './AddNewUserForm'
 import { addUser } from '../../actions/addUser'
+import { mockPush } from '../../db/mockDB';
 
 configure({ adapter: new Adapter() })
 
@@ -43,11 +44,7 @@ describe('<AddNewUserForm />', () => {
         const fire = require('../../db/fire')
         fire.saveUser = () => {
             saveUserCalled = true
-            return {
-                then: callback => {
-                    callback({ key: 1 })
-                }
-            }
+            return mockPush
         }
 
         beforeEach(() => {

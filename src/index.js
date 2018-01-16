@@ -7,15 +7,15 @@ import financeApp from './reducers'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { addDataFromFirebase } from './actions/addDataFromFirebase'
-import fire from './fire'
+import fire from './db/fire'
 import firebase from 'firebase'
 import { signIn } from './actions/signIn'
 import { getUserDetails } from './utils'
 
 const store = createStore(financeApp, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
-const usersRef = fire.database().ref('users').orderByKey().limitToLast(100);
-const gamesRef = fire.database().ref('games').orderByKey().limitToLast(100);
+const usersRef = fire.database().ref('users');
+const gamesRef = fire.database().ref('games');
 
 firebase.auth().onAuthStateChanged(function (user) {
   if (user !== undefined) {

@@ -48,13 +48,13 @@ export const addGame = (game) => {
 export const addGameToUser = (userId, game) => {
     const updates = {}
     updates['/users/' + userId + '/games/' + game.id] = true
-    fire.database().ref().update(updates);
+    return fire.database().ref().update(updates);
 }
 
 export const toggleAttendance = (user) => {
     const updates = {}
     updates['/users/' + user.id + '/attending'] = !user.attending
-    fire.database().ref().update(updates);
+    return fire.database().ref().update(updates);
 }
 
 export default fire;

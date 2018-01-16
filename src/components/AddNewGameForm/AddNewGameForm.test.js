@@ -3,6 +3,7 @@ import { configure, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import { AddNewGameForm, addNewGame } from './AddNewGameForm'
 import { addGameForUser } from '../../actions/addGame'
+import { mockPush } from '../../db/mockDB';
 
 configure({ adapter: new Adapter() })
 
@@ -99,11 +100,7 @@ describe('<AddNewGameForm />', () => {
         const fire = require('../../db/fire')
         fire.addGame = () => {
             addGameCalled = true
-            return {
-                then: callback => {
-                    callback({ key: 1 })
-                }
-            }
+            return mockPush
         }
         fire.addGameToUser = () => { addGameToUserCalled = true }
 
