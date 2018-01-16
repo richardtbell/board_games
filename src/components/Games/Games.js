@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { flattenArray } from '../../utils'
 
-const Games = props => {
+export const Games = props => {
     const gamesList = props.games.map(game => <li key={game.name} >{game.name}: {game.minPlayers}-{game.maxPlayers} players</li>)
     return (
         <div>

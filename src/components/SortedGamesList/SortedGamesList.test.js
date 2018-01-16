@@ -2,11 +2,12 @@ import React from 'react'
 import { configure, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import { SortedGamesList } from './SortedGamesList'
+import Games from '../Games/Games'
 
 configure({ adapter: new Adapter() })
 
 function expectGamesPropsToHaveOrder(wrapper, orderedArray) {
-    const gamesProps = wrapper.find('Games').props().games;
+    const gamesProps = wrapper.find(Games).props().games;
     expect(gamesProps).toEqual(orderedArray)
 }
 
@@ -24,7 +25,7 @@ describe('<SortedGamesList />', () => {
     })
 
     it('should render <Games />', () => {
-        expect(wrapper.find('Games')).toHaveLength(1)
+        expect(wrapper.find(Games)).toHaveLength(1)
     })
 
     it('should order games by minPlayers first', () => {

@@ -38,9 +38,7 @@ const users = (state = [], action) => {
                 if (user.id === action.userId) {
                     const game = {}
                     game[action.game.id] = true
-                    console.log('game', game)
                     const updatedUser = { ...user, games: { ...user.games, ...game } }
-                    console.log('updatedUser', updatedUser)
                     return updatedUser
                 } else {
                     return user

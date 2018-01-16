@@ -58,18 +58,21 @@ describe('users reducer', () => {
     describe('ADD_GAME_FOR_USER', () => {
         const user1 = { name: 'bob', id: 1, games: [] }
         const user2 = { name: 'alfred', id: 2, games: [] }
-        const game = { name: 'game' }
+        const game = { id: 'fakeGame', name: 'game' }
+        const action = { game, userId: user1.id }
 
         it('should return previous state when no games added to user', () => {
             expect(users([], addGameForUser({}))).toEqual([])
         })
 
         it('should add game to user', () => {
-            expect(users([user1], addGameForUser({ game, userId: user1.id }))).toEqual([{ name: 'bob', id: 1, games: [{ name: 'game' }] }])
+            expect(users([user1], addGameForUser(action))).toEqual(
+                [{ name: 'bob', id: 1, games: { fakeGame: true } }])
         })
 
         it('should add game to only correct user', () => {
-            expect(users([user1, user2], addGameForUser({ game, userId: user1.id }))).toEqual([{ name: 'bob', id: 1, games: [{ name: 'game' }] }, user2])
+            expect(users([user1, user2], addGameForUser(action))).toEqual(
+                [{ name: 'bob', id: 1, games: { fakeGame: true } }, user2])
         })
     })
 

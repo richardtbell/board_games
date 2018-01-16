@@ -3,6 +3,7 @@ import { configure, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import User from './User'
 import AddNewGameForm from '../AddNewGameForm/AddNewGameForm'
+import Games from '../Games/Games'
 
 configure({ adapter: new Adapter() })
 
@@ -44,7 +45,7 @@ describe('<User />', () => {
         })
 
         it('should render Games', () => {
-            expect(wrapper.find('Games')).toHaveLength(1)
+            expect(wrapper.find(Games)).toHaveLength(1)
         })
     })
 

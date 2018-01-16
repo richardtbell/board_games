@@ -1,5 +1,5 @@
 import React from 'react';
-import Games from '../Games/Games'
+import { Games } from '../Games/Games'
 import { flattenArray } from '../../utils'
 import { connect } from 'react-redux'
 import Users from '../Users/Users'
@@ -11,12 +11,26 @@ export const getPlayersAttending = (users) => {
     return users.filter(user => user.attending)
 }
 
-export const getPlayersGames = (users) => {
-    if (!users) {
+const getUserGames = (allGames, ownGames) => {
+    if (allGames === ownGames) {
+        return allGames
+    }
+    if (ownGames) {
+        return flattenArray(ownGames.map((gameId) => {
+            return allGames.filter(game => game.id === gameId)
+        }))
+    }
+    return []
+}
+
+export const getPlayersGames = (state) => {
+    if (!state || !state.users) {
         return []
     }
-    const games = users.map(user => user.attending ? Object.values(user.games) : [])
-    return flattenArray(games)
+    const games = state.users.map(user => {
+        return user.attending && user.games ? Object.keys(user.games) : []
+    })
+    return getUserGames(state.games, flattenArray(games))
 }
 
 export const Event = props => {
@@ -46,7 +60,7 @@ export const Event = props => {
 const mapStateToProps = (state) => {
     return {
         players: getPlayersAttending(state.users),
-        games: getPlayersGames(state.users),
+        games: getPlayersGames(state),
         users: state.users
     }
 }

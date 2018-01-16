@@ -97,7 +97,14 @@ describe('<AddNewGameForm />', () => {
             dispatchArgs = args
         }
         const fire = require('../../fire')
-        fire.addGame = () => { addGameCalled = true }
+        fire.addGame = () => {
+            addGameCalled = true
+            return {
+                then: callback => {
+                    callback({ key: 1 })
+                }
+            }
+        }
         fire.addGameToUser = () => { addGameToUserCalled = true }
 
         beforeEach(() => {
@@ -117,7 +124,7 @@ describe('<AddNewGameForm />', () => {
             expect(dispatchCalled).toBe(false)
             addNewGame(mockDispatch, 1, { name: 'test' })
             expect(dispatchCalled).toBe(true)
-            expect(dispatchArgs).toEqual(addGameForUser({ userId: 1, game: { name: 'test' } }))
+            expect(dispatchArgs).toEqual(addGameForUser({ userId: 1, game: { id: 1, name: 'test' } }))
         })
 
         it('should add the game to the database', () => {

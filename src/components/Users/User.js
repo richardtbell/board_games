@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import AddNewGameForm from '../AddNewGameForm/AddNewGameForm'
 import UserAttending from '../UserAttending/UserAttending'
 import Games from '../Games/Games'
 
@@ -28,7 +27,7 @@ export default class User extends Component {
         return (
             <li>
                 <span>{this.props.user.displayName}</span>
-                {/* <UserAttending user={this.props.user} /> */}
+                <UserAttending user={this.props.user} />
                 {this.renderGames()}
             </li>
         )

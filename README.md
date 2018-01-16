@@ -43,10 +43,11 @@ There's an npm script to build and deploy.
 * SuperAdmin role?
 
 ## TECH DEBT
-* Test fire.js
+* Test fire.js && extract mocks into same file
 * Sort out DB
 * Don't update state optimistically?
 * Users.js - need to call Object.values - don't like this
 * Test routes in App.test.js
 * Remove the need to configure the adaptor in every test file
-070436 26778904
+* Add "attending" to event but not users
+* Games should be a purely presentational list of games (props should be an array)
