@@ -1,5 +1,5 @@
 import React from 'react'
-import { Field, reduxForm, FormSection } from 'redux-form'
+import { Field, reduxForm, FormSection, isPristine } from 'redux-form'
 import { connect } from 'react-redux'
 
 const Profile = (props) => {
@@ -26,7 +26,7 @@ const Profile = (props) => {
                     })}
                 </ul>
             </FormSection>
-            <button type='submit'>Save Changes</button>
+            <button type='submit' disabled={props.pristine}>Save Changes</button>
         </form>
     )
 }
@@ -40,7 +40,8 @@ const getLoggedInUser = state => {
 
 const mapStatetoProps = state => ({
     initialValues: getLoggedInUser(state),
-    games: state.games
+    games: state.games,
+    pristine: isPristine('profile')
 })
 
 export default connect(mapStatetoProps)(profileForm)

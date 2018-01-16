@@ -11,6 +11,7 @@ export const StyledNavLink = styled(NavLink).attrs({
     text-decoration: none;
     font-size: 32px;
     color: gray;
+    float: ${props => props.align};
 
     &.${activeClassName} {
       text-decoration: underline;

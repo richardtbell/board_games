@@ -32,10 +32,6 @@ export class AddNewGameForm extends Component {
         this.setState({ maxPlayers: value })
     }
 
-    componentDidMount() {
-        this.nameInput.focus()
-    }
-
     render() {
         return (
             <form onSubmit={e => {

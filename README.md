@@ -17,7 +17,6 @@ There's an npm script to build and deploy.
 ## Epics
 * Add group
 * Join group
-* User login
 * Host event
 * Invite users
 * Email users that they were invited to group / event
@@ -27,19 +26,13 @@ There's an npm script to build and deploy.
 * Track games played
 
 ## Next Steps
-* New User page
-* Edit user page
-* reference games array instead of storing games twice (not urgent)
 * Add styles
-* Option to choose game from list as well as add details
 * Add form validation
-* Have clear all attending
 * Table format
 * Add group
 * Create event in group
 * Scrape games from boardgamegeek
 * Redirects (Signin -> Profile, anywhere signed out -> signin)
-* login cookie to persist login on page reload
 * SuperAdmin role?
 
 ## TECH DEBT
@@ -52,3 +45,4 @@ There's an npm script to build and deploy.
 * Add "attending" to event but not users
 * Games should be a purely presentational list of games (props should be an array)
 * Only able to click attending if its your own user
+* Signin / logout 
