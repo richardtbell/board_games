@@ -32,6 +32,13 @@ export class AddNewGameForm extends Component {
         this.setState({ maxPlayers: value })
     }
 
+    isDisabled = () => {
+        const fields = Object.keys(this.state)
+        return fields.some(el => {
+            return this.state[el].length === 0
+        })
+    }
+
     render() {
         return (
             <form onSubmit={e => {
@@ -52,7 +59,7 @@ export class AddNewGameForm extends Component {
                     Max Players:
                         <input onChange={e => { this.updateMaxPlayersInputElement(e.target.value) }} value={this.state.maxPlayers} />
                 </label>
-                <button type='submit'>Add Game</button>
+                <button type='submit' disabled={this.isDisabled()}>Add Game</button>
             </form>
         )
     }

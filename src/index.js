@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
 import App from './App'
@@ -11,47 +11,83 @@ import fire from './db/fire'
 import firebase from 'firebase'
 import { signIn } from './actions/signIn'
 import { getUserDetails } from './utils'
+import { getPlayersGames } from './components/Event/Event';
+import { Redirect } from 'react-router-dom';
 
 const store = createStore(financeApp, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 const usersRef = fire.database().ref('users');
 const gamesRef = fire.database().ref('games');
 
-firebase.auth().onAuthStateChanged(function (user) {
-  if (user !== undefined) {
-    store.dispatch(signIn(getUserDetails(user)))
-  } else {
-    // No user is signed in.
+class Index extends Component {
+  state = {
+    signedIn: true,
+    loading: true
   }
-});
 
-usersRef.once('value', function (snapshot) {
-  const snapValues = snapshot.val();
-  if (snapValues) {
-    const users = Object.keys(snapValues).map(id => {
-      return { id: id, ...snapValues[id] }
+  componentDidMount() {
+    const that = this
+    const reAuth = new Promise((resolve, reject) => {
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user !== null) {
+          store.dispatch(signIn(getUserDetails(user)))
+          that.setState({ signedIn: true })
+        } else {
+          that.setState({ signedIn: false })
+        }
+        resolve()
+      });
     })
-    store.dispatch(addDataFromFirebase({ users }))
-  }
-});
 
-gamesRef.once('value', function (snapshot) {
-  const snapValues = snapshot.val();
-  if (snapValues) {
-    const games = Object.keys(snapValues).map(id => {
-      return { id: id, ...snapValues[id] }
+    const getUserValues = new Promise((resolve, reject) => {
+      usersRef.once('value', function (snapshot) {
+        const snapValues = snapshot.val();
+        if (snapValues) {
+          const users = Object.keys(snapValues).map(id => {
+            return { id: id, ...snapValues[id] }
+          })
+          store.dispatch(addDataFromFirebase({ users }))
+          resolve()
+        }
+      });
     })
-    store.dispatch(addDataFromFirebase({ games }))
+
+    const getGamesValues = new Promise((resolve, reject) => {
+      gamesRef.once('value', function (snapshot) {
+        const snapValues = snapshot.val();
+        if (snapValues) {
+          const games = Object.keys(snapValues).map(id => {
+            return { id: id, ...snapValues[id] }
+          })
+          store.dispatch(addDataFromFirebase({ games }))
+          resolve()
+        }
+      });
+    })
+    Promise.all([reAuth, getUserValues, getPlayersGames]).then(() => {
+      this.setState({ loading: false })
+    })
   }
-});
 
-const app = (
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>
-)
+  render() {
+    let app = <p>loading...</p>
+    if (!this.state.signedIn) {
+      app = <div><App /><Redirect to='/signin' /></div>
+    }
+    if (!this.state.loading) {
+      app = <App />
+    }
+    return (
+      <Provider store={store}>
+        <BrowserRouter>
+          {app}
+        </BrowserRouter>
+      </Provider>
+    )
 
-ReactDOM.render(app, document.getElementById('root'));
+  }
+}
+
+
+ReactDOM.render(<Index />, document.getElementById('root'));
 registerServiceWorker();

@@ -1,6 +1,7 @@
 import React from 'react';
 import Users from './pages/Users'
 import SignIn from './pages/SignIn'
+import SignOut from './pages/SignOut'
 import Profile from './pages/Profile'
 import Event from './components/Event/Event'
 import SortedGamesList from './components/SortedGamesList/SortedGamesList'
@@ -19,6 +20,7 @@ const App = props => {
         <Route path="/games" component={SortedGamesList} />
         <Route path="/event" component={Event} />
         <Route path="/signin" component={SignIn} />
+        <Route path="/signout" component={SignOut} />
         <Route path="/" exact component={Event} />
         <Route component={PageNotFound} />
       </Switch>

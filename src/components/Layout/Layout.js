@@ -3,8 +3,6 @@ import { Redirect } from 'react-router-dom'
 import NavigationBar from '../NavigationBar/NavigationBar'
 import firebase from 'firebase'
 
-let redirect
-
 class Layout extends Component {
     state = {
         signedIn: false
@@ -13,10 +11,8 @@ class Layout extends Component {
     componentWillMount() {
         const that = this
         firebase.auth().onAuthStateChanged(function (user) {
-            if (user !== undefined) {
+            if (user !== null) {
                 that.setState({ signedIn: true })
-            } else {
-                redirect = <Redirect to='/signin' />
             }
         });
     }
@@ -24,7 +20,6 @@ class Layout extends Component {
     render() {
         return (
             <div>
-                {redirect}
                 <NavigationBar signedIn={this.state.signedIn} />
                 {this.props.children}
             </div>
