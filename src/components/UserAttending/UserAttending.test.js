@@ -36,7 +36,7 @@ describe('handleCheckboxChange', () => {
     let dispatchArgs
     const dispatch = (args) => { dispatchArgs = args }
     let toggleAttendanceDbCalled
-    const fire = require('../../fire')
+    const fire = require('../../db/fire')
 
     fire.toggleAttendance = () => {
         toggleAttendanceDbCalled = true

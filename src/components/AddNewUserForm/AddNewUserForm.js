@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { addUser } from '../../actions/addUser'
-import { saveUser } from '../../fire'
+import { saveUser } from '../../db/fire'
 
 export const addNewUser = (dispatch, input) => {
     if (!input.value.trim()) {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addGameForUser } from '../../actions/addGame'
-import { addGame, addGameToUser } from '../../fire'
+import { addGame, addGameToUser } from '../../db/fire'
 
 export const addNewGame = (dispatch, userId, game) => {
     if (!game.name.trim()) {

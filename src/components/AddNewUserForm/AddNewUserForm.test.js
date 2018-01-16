@@ -40,7 +40,7 @@ describe('<AddNewUserForm />', () => {
         let input
         let saveUserCalled
         const dispatch = (args) => { dispatchArgs = args }
-        const fire = require('../../fire')
+        const fire = require('../../db/fire')
         fire.saveUser = () => {
             saveUserCalled = true
             return {

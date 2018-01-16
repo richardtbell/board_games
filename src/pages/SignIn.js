@@ -3,7 +3,7 @@ import React from 'react'
 import firebase from 'firebase'
 import { signIn } from '../actions/signIn'
 import { connect } from 'react-redux'
-import { saveUser } from '../fire'
+import { saveUser } from '../db/fire'
 import { getUserDetails } from '../utils'
 
 const provider = new firebase.auth.GoogleAuthProvider();

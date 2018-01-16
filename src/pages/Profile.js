@@ -4,7 +4,7 @@ import AddNewGameForm from '../components/AddNewGameForm/AddNewGameForm'
 import { Redirect } from 'react-router-dom'
 import ProfileForm from '../components/Profile/Profile'
 import { updateUser } from '../actions/updateUser'
-import { saveUser } from '../fire'
+import { saveUser } from '../db/fire'
 
 const Profile = (props) => {
     let redirect

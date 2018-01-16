@@ -96,7 +96,7 @@ describe('<AddNewGameForm />', () => {
             dispatchCalled = true
             dispatchArgs = args
         }
-        const fire = require('../../fire')
+        const fire = require('../../db/fire')
         fire.addGame = () => {
             addGameCalled = true
             return {

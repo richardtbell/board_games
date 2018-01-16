@@ -1,7 +1,7 @@
 import React from 'react'
 import { toggleAttendance } from '../../actions/toggleAttendance'
 import { connect } from 'react-redux'
-import { toggleAttendance as toggleDbAttendance } from '../../fire'
+import { toggleAttendance as toggleDbAttendance } from '../../db/fire'
 import styled from 'styled-components'
 
 export const handleCheckboxChange = (dispatch, user) => {
