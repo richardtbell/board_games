@@ -8,6 +8,7 @@ import { Switch, Route } from 'react-router-dom'
 import PageNotFound from './components/PageNotFound/PageNotFound'
 import Layout from './components/Layout/Layout'
 import './commonStyles.css'
+import './commonStyles.css'
 
 const App = props => {
   return (

@@ -16,7 +16,7 @@ export default class User extends Component {
         if (this.state.showGames) {
             return (
                 <div>
-                    <Games games={Object.values(this.props.user.games)} />
+                    <Games games={this.props.user.games} />
                 </div>
             )
         } else {

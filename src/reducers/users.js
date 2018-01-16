@@ -36,7 +36,11 @@ const users = (state = [], action) => {
         case ADD_GAME_FOR_USER:
             return state.map(user => {
                 if (user.id === action.userId) {
-                    const updatedUser = { ...user, games: [...user.games, action.game] }
+                    const game = {}
+                    game[action.game.id] = true
+                    console.log('game', game)
+                    const updatedUser = { ...user, games: { ...user.games, ...game } }
+                    console.log('updatedUser', updatedUser)
                     return updatedUser
                 } else {
                     return user

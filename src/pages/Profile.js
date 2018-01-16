@@ -7,6 +7,7 @@ import { Field, reduxForm } from 'redux-form'
 import ProfileForm from '../components/Profile/Profile'
 import { updateUser } from '../actions/updateUser'
 import { saveUser } from '../fire'
+import { flattenArray } from '../utils'
 
 const Profile = (props) => {
     let redirect
@@ -22,8 +23,7 @@ const Profile = (props) => {
     return (
         <div>
             <ProfileForm onSubmit={handleSubmit} />
-            <h2>Games</h2>
-            <Games games={props.user.games ? Object.values(props.user.games) : []} />
+            <h2>Add new Game</h2>
             <AddNewGameForm userId={props.user.id} />
         </div>
     )

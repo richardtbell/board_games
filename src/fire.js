@@ -42,11 +42,13 @@ export const findUserBy = ({ field, value }) => {
 }
 
 export const addGame = (game) => {
-    fire.database().ref('/games').push(game);
+    return fire.database().ref('/games').push(game);
 }
 
 export const addGameToUser = (userId, game) => {
-    fire.database().ref('/users/' + userId + '/games').push(game);
+    const updates = {}
+    updates['/users/' + userId + '/games/' + game.id] = true
+    fire.database().ref().update(updates);
 }
 
 export const toggleAttendance = (user) => {

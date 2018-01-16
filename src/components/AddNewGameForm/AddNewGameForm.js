@@ -7,9 +7,11 @@ export const addNewGame = (dispatch, userId, game) => {
     if (!game.name.trim()) {
         return
     }
-    addGame(game)
-    addGameToUser(userId, game)
-    dispatch(addGameForUser({ userId, game }))
+    addGame(game).then(response => {
+        const savedGame = { ...game, id: response.key }
+        dispatch(addGameForUser({ userId, game: savedGame }))
+        addGameToUser(userId, savedGame)
+    })
 }
 
 export class AddNewGameForm extends Component {

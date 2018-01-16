@@ -29,7 +29,7 @@ usersRef.once('value', function (snapshot) {
   const snapValues = snapshot.val();
   if (snapValues) {
     const users = Object.keys(snapValues).map(id => {
-      return { id: id, games: [], ...snapValues[id] }
+      return { id: id, ...snapValues[id] }
     })
     store.dispatch(addDataFromFirebase({ users }))
   }
