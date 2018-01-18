@@ -35,7 +35,7 @@ export const getPlayersGames = (state) => {
 
 export const Event = props => {
     const playersList = props.players.map(player => {
-        return <div key={player.id}>{player.name}</div>
+        return <li key={player.id}>{player.displayName}</li>
     })
 
     const getSuitableGames = () => {
@@ -50,7 +50,9 @@ export const Event = props => {
             <h2>Players invited</h2>
             <Users users={props.users} />
             <h2>Players Attending</h2>
-            {playersList}
+            <ul>
+                {playersList}
+            </ul>
             <h2>Suitable Games</h2>
             <Games games={getSuitableGames()} />
         </div>
