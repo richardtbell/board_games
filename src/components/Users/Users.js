@@ -7,7 +7,7 @@ export const Users = (props) => {
 
     return (
         <div>
-            <ul>
+            <ul className='list-group'>
                 {userList}
             </ul>
         </div>

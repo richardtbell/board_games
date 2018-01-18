@@ -12,10 +12,12 @@ export const Profile = (props) => {
     }
 
     return (
-        <div>
-            <ProfileForm onSubmit={handleSubmit} />
-            <h2>Add new Game</h2>
-            <AddNewGameForm userId={props.user.id} />
+        <div className='container' >
+            <div className='col-sm-6' >
+                <ProfileForm onSubmit={handleSubmit} />
+                <h2>Add new Game</h2>
+                <AddNewGameForm userId={props.user.id} />
+            </div>
         </div>
     )
 }

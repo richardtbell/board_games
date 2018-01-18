@@ -4,29 +4,34 @@ import { connect } from 'react-redux'
 
 const Profile = (props) => {
     return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <label htmlFor='displayName'>Display Name</label>
-                <Field name='displayName' component='input' type='text' />
+        <form onSubmit={props.handleSubmit} className='mb-3' >
+            <div className='input-group mb-3'>
+                <div className='input-group-prepend'>
+                    <span className='input-group-text'>Display Name:</span>
+                </div>
+                <Field name='displayName' component='input' type='text' className='form-control' />
             </div>
-            <div>
-                <label htmlFor='email'>Email</label>
-                <Field name='email' component='input' type='email' />
+            <div className='input-group mb-3'>
+                <div className='input-group-prepend'>
+                    <span className='input-group-text'>Email:</span>
+                </div>
+                <Field name='email' component='input' type='email' className='form-control' />
             </div>
+
             <FormSection name='games'>
                 <p>Games Owned</p>
-                <ul>
+                <ul className='list-group mb-3' >
                     {props.games.map(game => {
                         return (
-                            <li key={game.id}>
-                                <label htmlFor={game.id}>{game.name}</label>
+                            <li className='list-group-item' key={game.id}>
                                 <Field name={game.id} component='input' type='checkbox' />
+                                <label htmlFor={game.id}>{game.name}</label>
                             </li>
                         )
                     })}
                 </ul>
             </FormSection>
-            <button type='submit' disabled={props.pristine}>Save Changes</button>
+            <button className='btn btn-primary' type='submit' disabled={props.pristine}>Save Changes</button>
         </form>
     )
 }

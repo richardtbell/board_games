@@ -57,17 +57,17 @@ export class SignInPage extends Component {
             redirect = <Redirect to='/profile' />
         }
         let authForm = (
-            <div>
+            <div className='col-sm-6'>
                 <SignInForm onSubmit={handleSignIn} />
-                <button id='googleSSO' onClick={this.props.handleSignInWithGoogle}>Sign in with Google</button>
-                <button onClick={() => this.setState({ createAccount: true })}>Create New Account</button>
+                <button className='btn btn-success' id='googleSSO' onClick={this.props.handleSignInWithGoogle}>Sign in with Google</button>
+                <button className='btn btn-info' onClick={() => this.setState({ createAccount: true })}>Create New Account</button>
             </div>
         )
         if (this.state.createAccount) {
             authForm = <RegisterForm onSubmit={handleRegister} />
         }
         return (
-            <div>
+            <div className='container'>
                 {redirect}
                 {authForm}
             </div>

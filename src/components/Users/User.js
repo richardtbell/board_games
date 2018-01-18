@@ -19,13 +19,13 @@ export default class User extends Component {
                 </div>
             )
         } else {
-            return <button onClick={this.handleButtonClick}>Show Games</button>
+            return <button className='btn btn-info' onClick={this.handleButtonClick}>Show Games</button>
         }
     }
 
     render() {
         return (
-            <li>
+            <li className='list-group-item'>
                 <span>{this.props.user.displayName}</span>
                 <UserAttending user={this.props.user} />
                 {this.renderGames()}

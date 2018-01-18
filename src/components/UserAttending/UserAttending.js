@@ -16,8 +16,12 @@ const Label = styled.label`
 export const UserAttending = (props) => {
     return (
         <Label>
+            <input
+                type="checkbox"
+                onChange={() => props.toggleAttendance(props.user)}
+                checked={props.user.attending}
+            />
             Attending?
-            <input type="checkbox" onChange={() => props.toggleAttendance(props.user)} checked={props.user.attending} />
         </Label>
     )
 }

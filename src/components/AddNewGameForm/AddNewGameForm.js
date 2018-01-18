@@ -47,19 +47,41 @@ export class AddNewGameForm extends Component {
                 this.setState(this.initialState)
                 this.nameInput.focus()
             }}>
-                <label>
-                    Game Name:
-                        <input ref={node => this.nameInput = node} onChange={e => { this.updateNameInputElement(e.target.value) }} value={this.state.name} />
-                </label>
-                <label>
-                    Min Players:
-                        <input onChange={e => { this.updateMinPlayersInputElement(e.target.value) }} value={this.state.minPlayers} />
-                </label>
-                <label>
-                    Max Players:
-                        <input onChange={e => { this.updateMaxPlayersInputElement(e.target.value) }} value={this.state.maxPlayers} />
-                </label>
-                <button type='submit' disabled={this.isDisabled()}>Add Game</button>
+                <div className='input-group mb-3'>
+                    <div className='input-group-prepend'>
+                        <span className='input-group-text'>Game Name:</span>
+                    </div>
+                    <input
+                        className='form-control'
+                        type='text'
+                        ref={node => this.nameInput = node}
+                        onChange={e => { this.updateNameInputElement(e.target.value) }}
+                        value={this.state.name}
+                    />
+                </div>
+                <div className='input-group mb-3'>
+                    <div className='input-group-prepend'>
+                        <span className='input-group-text'>Min Players:</span>
+                    </div>
+                    <input
+                        className='form-control'
+                        type='text'
+                        onChange={e => { this.updateMinPlayersInputElement(e.target.value) }}
+                        value={this.state.minPlayers}
+                    />
+                </div>
+                <div className='input-group mb-3'>
+                    <div className='input-group-prepend'>
+                        <span className='input-group-text'>Max Players:</span>
+                    </div>
+                    <input
+                        className='form-control'
+                        type='text'
+                        onChange={e => { this.updateMaxPlayersInputElement(e.target.value) }}
+                        value={this.state.maxPlayers}
+                    />
+                </div>
+                <button className='btn btn-success' type='submit' disabled={this.isDisabled()}>Add Game</button>
             </form>
         )
     }

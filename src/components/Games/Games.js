@@ -3,10 +3,16 @@ import { connect } from 'react-redux'
 import { flattenArray } from '../../utils'
 
 export const Games = props => {
-    const gamesList = props.games.map(game => <li key={game.name} >{game.name}: {game.minPlayers}-{game.maxPlayers} players</li>)
+    const gamesList = props.games.map(game => {
+        return (
+            <li key={game.name} className='list-group-item'>
+                {game.name}: {game.minPlayers}-{game.maxPlayers} players
+            </li>
+        )
+    })
     return (
         <div>
-            <ul>
+            <ul className='list-group'>
                 {gamesList}
             </ul>
         </div>
