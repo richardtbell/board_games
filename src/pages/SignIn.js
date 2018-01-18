@@ -1,5 +1,4 @@
 import React from 'react'
-// import fire from '../fire'
 import firebase from 'firebase'
 import { signIn } from '../actions/signIn'
 import { connect } from 'react-redux'
@@ -7,8 +6,6 @@ import { saveUser } from '../db/fire'
 import { getUserDetails } from '../utils'
 
 const provider = new firebase.auth.GoogleAuthProvider();
-
-
 
 const handleSignIn = (dispatch) => {
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
@@ -26,7 +23,7 @@ const handleSignIn = (dispatch) => {
 
 }
 
-const SignInPage = (props) => {
+export const SignInPage = (props) => {
     return (
         <div>
             <button onClick={props.handleSignIn}>Sign in with Google</button>

@@ -4,7 +4,7 @@ import { signOut } from '../actions/signOut'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-const SignOutPage = (props) => {
+export const SignOutPage = (props) => {
     firebase.auth().signOut().then(function () {
         props.dispatch(signOut())
     }, function (error) {

@@ -4,6 +4,7 @@ import { addGameForUser } from '../actions/addGame'
 import { addDataFromFirebase } from '../actions/addDataFromFirebase'
 import { toggleAttendance } from '../actions/toggleAttendance'
 import { signIn } from '../actions/signIn'
+import { updateUser } from '../actions/updateUser';
 
 describe('users reducer', () => {
     it('should return the same state when no action', () => {
@@ -52,6 +53,23 @@ describe('users reducer', () => {
 
         it('should not add the same user twice', () => {
             expect(users([user1], signIn(user1))).toEqual([user1])
+        })
+    })
+
+    describe('UPDATE_USER', () => {
+        const user1 = { id: 1, name: 'fake', uid: 1 };
+        const user2 = { id: 2, name: 'fake2', uid: 2 };
+        let state
+        beforeEach(() => {
+            state = [user1, user2]
+        })
+
+        it('should return previous state when no user added', () => {
+            expect(users(state, updateUser())).toEqual(state)
+        })
+        it('should return update one user and not the other', () => {
+            const updatedUser1 = { id: 1, name: 'updated', uid: 1 }
+            expect(users(state, updateUser(updatedUser1))).toEqual([updatedUser1, user2])
         })
     })
 

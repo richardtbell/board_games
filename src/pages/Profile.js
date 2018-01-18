@@ -5,7 +5,7 @@ import ProfileForm from '../components/Profile/Profile'
 import { updateUser } from '../actions/updateUser'
 import { saveUser } from '../db/fire'
 
-const Profile = (props) => {
+export const Profile = (props) => {
     const handleSubmit = (values, dispatch) => {
         saveUser(values)
         dispatch(updateUser(values))

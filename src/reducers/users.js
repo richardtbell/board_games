@@ -26,6 +26,9 @@ const users = (state = [], action) => {
             action.user
             ]
         case UPDATE_USER:
+            if (!action.user) {
+                return state
+            }
             return state.map(user => {
                 if (user.id === action.user.id) {
                     return { ...action.user }
