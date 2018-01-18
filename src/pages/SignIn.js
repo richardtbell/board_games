@@ -27,7 +27,7 @@ const handleSignInWithGoogle = (dispatch) => {
 
 const handleRegister = (values, dispatch) => {
     firebase.auth().createUserWithEmailAndPassword(values.email, values.password).then(result => {
-        const newUser = { ...getUserDetails(result), displayName: values.displayName }
+        const newUser = getUserDetails(result)
         saveUser(newUser).then(user => {
             dispatch(signIn(user))
         })
@@ -59,7 +59,7 @@ export class SignInPage extends Component {
         let authForm = (
             <div>
                 <SignInForm onSubmit={handleSignIn} />
-                <button onClick={this.props.handleSignInWithGoogle}>Sign in with Google</button>
+                <button id='googleSSO' onClick={this.props.handleSignInWithGoogle}>Sign in with Google</button>
                 <button onClick={() => this.setState({ createAccount: true })}>Create New Account</button>
             </div>
         )
