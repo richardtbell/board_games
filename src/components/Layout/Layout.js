@@ -1,29 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import NavigationBar from '../NavigationBar/NavigationBar'
-import firebase from 'firebase'
+import { connect } from 'react-redux';
 
-class Layout extends Component {
-    state = {
-        signedIn: false
-    }
+const Layout = props => {
+    return (
+        <div>
+            <NavigationBar signedIn={props.signedIn} />
+            {props.children}
+        </div>
+    )
+}
 
-    componentWillMount() {
-        const that = this
-        firebase.auth().onAuthStateChanged(function (user) {
-            if (user !== null) {
-                that.setState({ signedIn: true })
-            }
-        });
-    }
+const mapStateToProps = (state, ownProps) => {
+    console.log('state', state)
 
-    render() {
-        return (
-            <div>
-                <NavigationBar signedIn={this.state.signedIn} />
-                {this.props.children}
-            </div>
-        )
+    return {
+        signedIn: !!state.loggedInUser.uid,
+        ...ownProps
     }
 }
 
-export default Layout
+export default connect(mapStateToProps)(Layout)

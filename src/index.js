@@ -26,18 +26,6 @@ class Index extends Component {
 
   componentDidMount() {
     const that = this
-    const reAuth = new Promise((resolve, reject) => {
-      firebase.auth().onAuthStateChanged(function (user) {
-        if (user !== null) {
-          store.dispatch(signIn(getUserDetails(user)))
-          that.setState({ signedIn: true })
-        } else {
-          that.setState({ signedIn: false })
-        }
-        resolve()
-      });
-    })
-
     const getUserValues = new Promise((resolve, reject) => {
       usersRef.once('value', function (snapshot) {
         const snapValues = snapshot.val();
@@ -63,7 +51,14 @@ class Index extends Component {
         }
       });
     })
-    Promise.all([reAuth, getUserValues, getGamesValues]).then(() => {
+    Promise.all([getUserValues, getGamesValues]).then(() => {
+      const user = firebase.auth().currentUser
+      if (user !== null) {
+        store.dispatch(signIn(getUserDetails(user)))
+        that.setState({ signedIn: true })
+      } else {
+        that.setState({ signedIn: false })
+      }
       this.setState({ loading: false })
     })
   }

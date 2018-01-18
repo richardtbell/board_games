@@ -6,6 +6,7 @@ import { saveUser } from '../db/fire'
 import { getUserDetails } from '../utils'
 import RegisterForm from '../components/RegisterForm/RegisterForm';
 import SignInForm from '../components/SignInForm/SignInForm';
+import { Redirect } from 'react-router';
 
 const provider = new firebase.auth.GoogleAuthProvider();
 
@@ -51,6 +52,10 @@ export class SignInPage extends Component {
         createAccount: false
     }
     render() {
+        let redirect
+        if (this.props.signedIn) {
+            redirect = <Redirect to='/profile' />
+        }
         let authForm = (
             <div>
                 <SignInForm onSubmit={handleSignIn} />
@@ -63,6 +68,7 @@ export class SignInPage extends Component {
         }
         return (
             <div>
+                {redirect}
                 {authForm}
             </div>
         )
@@ -73,4 +79,8 @@ const mapDispatchToProps = dispatch => ({
     handleSignInWithGoogle: () => { handleSignInWithGoogle(dispatch) }
 })
 
-export default connect(null, mapDispatchToProps)(SignInPage)
+const mapStateToProps = state => {
+    return { signedIn: !!state.loggedInUser.uid }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignInPage)
