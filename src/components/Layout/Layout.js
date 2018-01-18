@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom'
 import NavigationBar from '../NavigationBar/NavigationBar'
 import firebase from 'firebase'
 

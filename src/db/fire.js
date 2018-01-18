@@ -18,6 +18,7 @@ export const saveUser = (user) => {
                 const updates = {}
                 const updatedUser = { ...foundUser, ...user }
                 updates['/users/' + foundUser.id] = updatedUser
+                console.log(updatedUser)
                 fire.database().ref().update(updates)
                 resolve(updatedUser)
             } else {

@@ -46,3 +46,6 @@ There's an npm script to build and deploy.
 * Games should be a purely presentational list of games (props should be an array)
 * Only able to click attending if its your own user
 * Signin / logout 
+* Immediately after registering, the display name is blank
+* Signout update nav bar
+* Redirect on signin page

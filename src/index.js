@@ -11,7 +11,6 @@ import fire from './db/fire'
 import firebase from 'firebase'
 import { signIn } from './actions/signIn'
 import { getUserDetails } from './utils'
-import { getPlayersGames } from './components/Event/Event';
 import { Redirect } from 'react-router-dom';
 
 const store = createStore(financeApp, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
@@ -64,7 +63,7 @@ class Index extends Component {
         }
       });
     })
-    Promise.all([reAuth, getUserValues, getPlayersGames]).then(() => {
+    Promise.all([reAuth, getUserValues, getGamesValues]).then(() => {
       this.setState({ loading: false })
     })
   }
